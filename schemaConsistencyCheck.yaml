@@ -1,0 +1,36 @@
+models:
+  - name: fact_loan
+    description: "Fact table containing loan details for financial reporting."
+    columns:
+      - name: loan_id
+        description: "Unique identifier for each loan."
+        tests:
+          - unique
+          - not_null
+      - name: borrower_id
+        description: "Foreign key referencing the borrower who took the loan."
+        tests:
+          - not_null
+      - name: loan_amount
+        description: "The total amount of the loan."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_borrower')
+              field: borrower_id
+      - name: interest_rate
+        description: "Interest rate applied to the loan."
+        tests:
+          - not_null
+      - name: term
+        description: "The term or duration of the loan in months."
+        tests:
+          - not_null
+      - name: maturity_date
+        description: "The date the loan matures and must be paid in full."
+        tests:
+          - not_null
+      - name: created_at
+        description: "The timestamp when the loan record was created."
+        tests:
+          - not_nulls
